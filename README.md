@@ -1,141 +1,92 @@
-Prerequisites
+# Hello Flask CI/CD
 
-Python 3.13
-Git
+## Prerequisites
 
-A GitHub repository for CI/CD
+* Python 3.13
+* Git
+* GitHub repository for CI/CD
 
-Setup Instructions
+## Setup Instructions
 
-Clone the repository:
+### 1. Clone the repository
 
-git clone <your-repository-url>
+```bash
+git clone <repo-url>
 cd hello_flask_CI_CD
+```
 
+### 2. Create and activate a virtual environment
 
+**Windows:**
 
-Create and activate a virtual environment:
-
+```powershell
 python -m venv .venv
-.venv\Scripts\activate  # On Windows
-# source .venv/bin/activate  # On macOS/Linux
+.venv\Scripts\activate
+```
 
+**macOS/Linux:**
 
+```bash
+python -m venv .venv
+source .venv/bin/activate
+```
 
-Install dependencies:
+### 3. Install dependencies
 
+```bash
 pip install -r requirements.txt
+```
 
+### 4. Run the Flask application
 
-
-Run the Flask application:
-
+```bash
 python app/main.py
+```
 
-The app will be available at http://127.0.0.1:5000.
+Access the app at: [http://127.0.0.1:5000](http://127.0.0.1:5000)
 
+## Running Tests
 
+### Unit tests
 
-Run unit tests:
-
+```bash
 python -m pytest tests/
+```
 
+### BDD tests
 
-
-Run BDD tests:
-
+```bash
 behave features/
+```
 
-CI/CD Pipeline
+## CI/CD Pipeline
 
-The project uses GitHub Actions for CI/CD, defined in .github/workflows/ci.yml. The pipeline:
+* GitHub Actions workflow: `.github/workflows/ci.yml`
+* Triggers: `push` and `pull_request` events on `main`
+* Steps:
 
+  1. Set up Python 3.13 on Ubuntu
+  2. Install dependencies
+  3. Run unit tests with pytest
+  4. Run BDD tests with behave
+* View workflow logs in GitHub Actions tab
 
+## Development Notes
 
+* Flask app: `app/main.py` (add routes/features as needed)
+* Unit tests: `tests/test_main.py`
+* BDD tests: `features/` (step definitions: `features/steps/`)
+* Dependencies: `requirements.txt` (update with `pip freeze > requirements.txt` after installing new packages)
+* Optional: Add `static/favicon.ico` to avoid 404 for favicon
 
+## Troubleshooting
 
-Triggers on push and pull_request events to the main branch.
+* File not found: check `app/main.py`
+* Dependency issues: verify packages in `requirements.txt`
+* Pipeline failures: see GitHub Actions logs
 
+## Future Improvements
 
-
-Sets up Python 3.13 on an Ubuntu environment.
-
-
-
-Installs dependencies from requirements.txt.
-
-
-
-Runs unit tests with pytest.
-
-
-
-Runs BDD tests with behave.
-
-To check the pipeline:
-
-
-
-
-
-Push changes to your GitHub repository.
-
-
-
-View the workflow logs in the "Actions" tab of your repository.
-
-Development Notes
-
-
-
-
-
-Flask: The app is defined in app/main.py. Add new routes and features as needed.
-
-
-
-Unit Tests: Located in tests/test_main.py. Use pytest for testing.
-
-
-
-BDD Tests: Feature files are in features/, with step definitions in features/steps/. Use behave for BDD testing.
-
-
-
-Dependencies: Managed in requirements.txt. Update with pip freeze > requirements.txt after installing new packages.
-
-
-
-Favicon: The app may return a 404 for favicon.ico. Add a static/favicon.ico file to resolve this.
-
-Troubleshooting
-
-
-
-
-
-File not found errors: Ensure app/main.py exists and is referenced correctly in commands.
-
-
-
-Dependency issues: Verify all required packages (e.g., Flask, pytest, behave) are in requirements.txt.
-
-
-
-Pipeline failures: Check GitHub Actions logs for detailed error messages.
-
-Future Improvements
-
-
-
-
-
-Add deployment steps to the CI/CD pipeline (e.g., deploy to Heroku or Vercel).
-
-
-
-Include code linting (e.g., flake8) in the pipeline.
-
-
-
-Add more comprehensive unit and BDD tests.
+* Deployment steps in CI/CD (Heroku, Vercel)
+* Code linting (flake8)
+* More comprehensive unit and BDD tests
